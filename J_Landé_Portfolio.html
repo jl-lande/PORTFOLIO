@@ -1,0 +1,894 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Janelle Landé - Portfolio Finance & M&A</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: linear-gradient(135deg, #f5f1eb 0%, #e8ddd4 60%);
+            color: #5d4037;
+            overflow-x: hidden;
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            padding: 1rem 2rem;
+            background: rgba(245, 241, 235, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(139, 125, 107, 0.2);
+            z-index: 1000;
+            transition: all 0.3s ease;
+        }
+
+        nav.scrolled {
+            background: rgba(232, 221, 212, 0.98);
+            box-shadow: 0 2px 20px rgba(139, 125, 107, 0.1);
+        }
+
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            background: linear-gradient(45deg, #8b7d6b, #7b8471);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            color: #5d4037;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .nav-links a:hover {
+            color: #7b8471;
+            transform: translateY(-2px);
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: linear-gradient(45deg, #8b7d6b, #7b8471);
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        /* Hero Section */
+        .hero {
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            background: linear-gradient(135deg, #f5f1eb 0%, #e8ddd4 100%);
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(139, 125, 107, 0.1) 1px, transparent 1px);
+            background-size: 50px 50px;
+            animation: float 20s infinite linear;
+        }
+
+        @keyframes float {
+            0% { transform: translate(-50%, -50%) rotate(0deg); }
+            100% { transform: translate(-50%, -50%) rotate(360deg); }
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            max-width: 800px;
+            padding: 0 2rem;
+        }
+
+        .hero h1 {
+            font-size: clamp(3rem, 8vw, 6rem);
+            font-weight: 800;
+            margin-bottom: 1rem;
+            background: linear-gradient(45deg, #5d4037, #8b7d6b, #7b8471);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: gradient 3s ease-in-out infinite;
+        }
+
+        @keyframes gradient {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+        }
+
+        .hero .subtitle {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: #8b7d6b;
+            font-weight: 600;
+        }
+
+        .hero p {
+            font-size: 1.25rem;
+            margin-bottom: 2rem;
+            opacity: 0.8;
+            line-height: 1.6;
+            color: #5d4037;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .cta-button {
+            display: inline-block;
+            padding: 1rem 2rem;
+            background: linear-gradient(45deg, #8b7d6b, #7b8471);
+            color: #fff;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            box-shadow: 0 10px 30px rgba(139, 125, 107, 0.3);
+        }
+
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 40px rgba(139, 125, 107, 0.4);
+            background: linear-gradient(45deg, #7b8471, #6d7a63);
+        }
+
+        .cta-button.secondary {
+            background: rgba(232, 221, 212, 0.8);
+            color: #5d4037;
+            border: 2px solid rgba(139, 125, 107, 0.3);
+        }
+
+        .cta-button.secondary:hover {
+            background: rgba(232, 221, 212, 1);
+            border-color: rgba(139, 125, 107, 0.5);
+        }
+
+        /* Sections */
+        section {
+            padding: 6rem 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            font-size: 3rem;
+            font-weight: 700;
+            text-align: center;
+            margin-bottom: 3rem;
+            background: linear-gradient(45deg, #5d4037, #8b7d6b);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        /* About Section */
+        .about-content {
+            display: grid;
+            grid-template-columns: 1fr 2fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        .about-image {
+            width: 100%;
+            height: 400px;
+            background: linear-gradient(45deg, #d4a574, #c4956c);
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 6rem;
+            color: #fff;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(139, 125, 107, 0.2);
+        }
+
+        .about-image::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255, 255, 255, 0.1) 2px, transparent 2px);
+            background-size: 30px 30px;
+            animation: rotate 30s infinite linear;
+        }
+
+        @keyframes rotate {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .about-text h3 {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+            color: #8b7d6b;
+        }
+
+        .about-text p {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            opacity: 0.9;
+            margin-bottom: 1.5rem;
+            color: #5d4037;
+        }
+
+        .achievements {
+            margin-top: 2rem;
+        }
+
+        .achievement-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 1rem;
+            padding: 0.5rem;
+            background: rgba(232, 221, 212, 0.6);
+            border-radius: 10px;
+            border: 1px solid rgba(139, 125, 107, 0.2);
+        }
+
+        .achievement-item span {
+            color: #8b7d6b;
+            margin-right: 0.5rem;
+            font-size: 1.2rem;
+        }
+
+        /* Experience Section */
+        .experience-timeline {
+            position: relative;
+            padding-left: 2rem;
+        }
+
+        .experience-timeline::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: linear-gradient(to bottom, #8b7d6b, #7b8471);
+        }
+
+        .experience-item {
+            position: relative;
+            margin-bottom: 3rem;
+            background: rgba(245, 241, 235, 0.8);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(139, 125, 107, 0.2);
+            border-radius: 20px;
+            padding: 2rem;
+            margin-left: 1rem;
+            box-shadow: 0 5px 20px rgba(139, 125, 107, 0.1);
+        }
+
+        .experience-item::before {
+            content: '';
+            position: absolute;
+            left: -1.75rem;
+            top: 2rem;
+            width: 12px;
+            height: 12px;
+            background: #8b7d6b;
+            border-radius: 50%;
+            border: 3px solid #f5f1eb;
+        }
+
+        .experience-company {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: #8b7d6b;
+            margin-bottom: 0.5rem;
+        }
+
+        .experience-role {
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            color: #5d4037;
+        }
+
+        .experience-period {
+            color: rgba(93, 64, 55, 0.7);
+            margin-bottom: 1rem;
+            font-style: italic;
+        }
+
+        .experience-tasks {
+            list-style: none;
+        }
+
+        .experience-tasks li {
+            margin-bottom: 0.5rem;
+            padding-left: 1rem;
+            position: relative;
+            color: #5d4037;
+        }
+
+        .experience-tasks li::before {
+            content: '▸';
+            position: absolute;
+            left: 0;
+            color: #8b7d6b;
+        }
+
+        /* Skills Section */
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .skill-category {
+            background: rgba(245, 241, 235, 0.8);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(139, 125, 107, 0.2);
+            border-radius: 20px;
+            padding: 2rem;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 20px rgba(139, 125, 107, 0.1);
+        }
+
+        .skill-category:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(139, 125, 107, 0.2);
+        }
+
+        .skill-category h4 {
+            font-size: 1.3rem;
+            margin-bottom: 1rem;
+            color: #8b7d6b;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .skill-category .skill-icon {
+            font-size: 1.5rem;
+        }
+
+        .skill-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+
+        .skill-tag {
+            background: rgba(212, 165, 116, 0.2);
+            color: #8b7d6b;
+            padding: 0.3rem 0.8rem;
+            border-radius: 15px;
+            font-size: 0.9rem;
+            border: 1px solid rgba(212, 165, 116, 0.3);
+        }
+
+        /* Education Section */
+        .education-grid {
+            display: grid;
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .education-item {
+            background: rgba(245, 241, 235, 0.8);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(139, 125, 107, 0.2);
+            border-radius: 20px;
+            padding: 2rem;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 5px 20px rgba(139, 125, 107, 0.1);
+        }
+
+        .education-item::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 4px;
+            height: 100%;
+            background: linear-gradient(to bottom, #8b7d6b, #7b8471);
+        }
+
+        .education-school {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: #8b7d6b;
+            margin-bottom: 0.5rem;
+        }
+
+        .education-degree {
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            color: #5d4037;
+        }
+
+        .education-period {
+            color: rgba(93, 64, 55, 0.7);
+            margin-bottom: 1rem;
+            font-style: italic;
+        }
+
+        .education-details {
+            font-size: 0.95rem;
+            line-height: 1.6;
+            opacity: 0.9;
+            color: #5d4037;
+        }
+
+        /* Contact Section */
+        .contact-content {
+            text-align: center;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .contact-links {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+
+        .contact-link {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            padding: 1rem 2rem;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 50px;
+            color: #fff;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            font-weight: 500;
+        }
+
+        .contact-link:hover {
+            background: rgba(255, 215, 0, 0.2);
+            border-color: rgba(255, 215, 0, 0.3);
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 2rem;
+            background: rgba(0, 0, 0, 0.2);
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+
+            .about-content {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+
+            .cta-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .hero h1 {
+                font-size: 3rem;
+            }
+
+            .hero .subtitle {
+                font-size: 1.2rem;
+            }
+
+            section {
+                padding: 4rem 1rem;
+            }
+
+            .contact-links {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Animations */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.6s ease;
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Mouse follower effect */
+        .cursor-glow {
+            position: fixed;
+            width: 20px;
+            height: 20px;
+            background: radial-gradient(circle, rgba(255, 215, 0, 0.3) 0%, transparent 70%);
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 9999;
+            transform: translate(-50%, -50%);
+            transition: transform 0.1s ease;
+        }
+    </style>
+</head>
+<body>
+    <div class="cursor-glow"></div>
+
+    <nav id="navbar">
+        <div class="nav-container">
+            <div class="logo">Janelle Landé</div>
+            <ul class="nav-links">
+                <li><a href="#home">Accueil</a></li>
+                <li><a href="#about">À propos</a></li>
+                <li><a href="#experience">Expérience</a></li>
+                <li><a href="#skills">Compétences</a></li>
+                <li><a href="#education">Formation</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <section id="home" class="hero">
+        <div class="hero-content fade-in">
+            <h1>Janelle Landé</h1>
+            <div class="subtitle">Finance Student</div>
+            <p>Étudiante EDHEC spécialisée en Corporate and Investment Banking<br>
+            Expertise en modélisation financière, évaluation d'entreprise et due diligence</p>
+            <div class="cta-buttons">
+                <a href="#experience" class="cta-button">Voir mon parcours</a>
+                <a href="https://drive.google.com/drive/folders/1stX0uieSHp62wqCN3Jqq8FmrC01pp0em" target="_blank" class="cta-button secondary">📁 Documents (Teasers, Lettre de reco...)</a>
+            </div>
+        </div>
+    </section>
+
+    <section id="about" class="fade-in">
+        <h2 class="section-title">À propos de moi</h2>
+        <div class="about-content">
+            <div class="about-image">
+                💼
+            </div>
+            <div class="about-text">
+                <p>Étudiante en dernière année à l'EDHEC, j'ai développé une solide expertise en modélisation et évaluation d'entreprises via mes expériences chez HETMOS (M&A) et MBDA (analyse financière).</p>
+                <p>J'ai participé à la rédaction de mémorandums, teasers, et à l'analyse d'EBITDA pour des deals réels. Ma rigueur et mes compétences analytiques m'ont permis d'être classée 3 fois Dean's List.</p>
+                
+                <div class="achievements">
+                    <div class="achievement-item">
+                        <span>🏆</span> Dean's List - 3 années consécutives (moyenne > 14/20)
+                    </div>
+                    <div class="achievement-item">
+                        <span>🎓</span> Baccalauréat avec félicitations (18,01/20)
+                    </div>
+                    <div class="achievement-item">
+                        <span>🌍</span> Erasmus à King's College Londres
+                    </div>
+                    <div class="achievement-item">
+                        <span>🏇</span> Sport-études équitation (8 ans)
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="experience" class="fade-in">
+        <h2 class="section-title">Expériences Professionnelles</h2>
+        <div class="experience-timeline">
+            <div class="experience-item">
+                <div class="experience-company">HETMOS</div>
+                <div class="experience-role">Stagiaire M&A</div>
+                <div class="experience-period">Juin 2025 - Août 2025 | Neuilly, France & Las Palmas, Espagne</div>
+                <ul class="experience-tasks">
+                    <li>Screening et qualification de PME pour des opportunités d'acquisition (cartographie sectorielle)</li>
+                    <li>Analyse d'EBITDA retraité, préparation de teasers et fiches de synthèse pour les acquéreurs</li>
+                    <li>Rédaction de mémorandums d'information et participation à la pré-due diligence</li>
+                    <li>Suivi du dealflow via CRM et mise en relation avec dirigeants de cibles identifiées</li>
+                </ul>
+            </div>
+
+            <div class="experience-item">
+                <div class="experience-company">MBDA</div>
+                <div class="experience-role">Analyste de données - Defense, Aerospace and Armament</div>
+                <div class="experience-period">Juin 2024 - Septembre 2024 | Paris, France</div>
+                <ul class="experience-tasks">
+                    <li>Création et automatisation de tableaux de bord financiers interactifs (SAP, Excel VBA, Power BI)</li>
+                    <li>Analyse des données comptables pour les clôtures mensuelles et audits internes</li>
+                    <li>Audits fournisseurs et vérification des procédures achats (conformité Sapin II)</li>
+                    <li>Amélioration de la traçabilité documentaire pour garantir la conformité réglementaire</li>
+                </ul>
+            </div>
+
+            <div class="experience-item">
+                <div class="experience-company">KPMG</div>
+                <div class="experience-role">Assistante comptable</div>
+                <div class="experience-period">Juin 2023 - Juillet 2023 | Amiens, France</div>
+                <ul class="experience-tasks">
+                    <li>Saisie comptable sur CEGID LOOP (ventes, factures, avoirs) et tenue des comptes</li>
+                    <li>Réalisation de lettrages et rapprochements bancaires</li>
+                    <li>Création de fichiers Excel pour le suivi TVA et les déclarations fiscales</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <section id="skills" class="fade-in">
+        <h2 class="section-title">Compétences</h2>
+        <div class="skills-grid">
+            <div class="skill-category">
+                <h4><span class="skill-icon">📊</span>Finance Corporate</h4>
+                <div class="skill-tags">
+                    <span class="skill-tag">Modélisation financière</span>
+                    <span class="skill-tag">Évaluation d'entreprise</span>
+                    <span class="skill-tag">DCF</span>
+                    <span class="skill-tag">Comparables</span>
+                    <span class="skill-tag">Due diligence</span>
+                    <span class="skill-tag">Analyse d'EBITDA</span>
+                </div>
+            </div>
+
+            <div class="skill-category">
+                <h4><span class="skill-icon">💎</span>Private Equity</h4>
+                <div class="skill-tags">
+                    <span class="skill-tag">LBO Modeling</span>
+                    <span class="skill-tag">Pitch Books</span>
+                    <span class="skill-tag">Market Research</span>
+                    <span class="skill-tag">Value Creation</span>
+                    <span class="skill-tag">Exit Strategies</span>
+                    <span class="skill-tag">Fund Analysis</span>
+                </div>
+            </div>
+
+            <div class="skill-category">
+                <h4><span class="skill-icon">🤝</span>M&A</h4>
+                <div class="skill-tags">
+                    <span class="skill-tag">Screening de cibles</span>
+                    <span class="skill-tag">Mémorandums</span>
+                    <span class="skill-tag">Teasers</span>
+                    <span class="skill-tag">Recherche d'acquéreurs</span>
+                    <span class="skill-tag">Cartographie sectorielle</span>
+                    <span class="skill-tag">Dealflow</span>
+                </div>
+            </div>
+
+            <div class="skill-category">
+                <h4><span class="skill-icon">💻</span>Outils Techniques</h4>
+                <div class="skill-tags">
+                    <span class="skill-tag">Excel VBA</span>
+                    <span class="skill-tag">Power Point</span>
+                    <span class="skill-tag">Word</span>
+                    <span class="skill-tag">Power BI</span>
+                    <span class="skill-tag">Power Query</span>
+                    <span class="skill-tag">base Python et HTML</span>
+                    <span class="skill-tag">CEGID LOOP</span>
+                    <span class="skill-tag">SAP</span>
+                    <span class="skill-tag">SPSS</span>
+                </div>
+            </div>
+
+            <div class="skill-category">
+                <h4><span class="skill-icon">🌍</span>Langues</h4>
+                <div class="skill-tags">
+                    <span class="skill-tag">Français (natif)</span>
+                    <span class="skill-tag">Anglais (C1)</span>
+                    <span class="skill-tag">Allemand (B1)</span>
+                    <span class="skill-tag">Italien (B1)</span>
+                    <span class="skill-tag">Coréen (A2)</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="education" class="fade-in">
+        <h2 class="section-title">Formation</h2>
+        <div class="education-grid">
+            <div class="education-item">
+                <div class="education-school">EDHEC Business School</div>
+                <div class="education-degree">Bachelor of Business Administration</div>
+                <div class="education-period">Septembre 2022 - Juillet 2026 | Lille, France</div>
+                <div class="education-details">
+                    <strong>Dean's List :</strong> 3 années obtenues avec les félicitations (moyenne > 14/20)<br>
+                    <strong>Cours spécialisés :</strong> Financial Mathematics, Corporate Finance, Private Equity & VC, M&A, Financial Analysis, Business Valuation, Excel & VBA
+                </div>
+            </div>
+
+            <div class="education-item">
+                <div class="education-school">King's College London</div>
+                <div class="education-degree">Programme Erasmus</div>
+                <div class="education-period">Septembre 2024 - Janvier 2025 | Londres, UK</div>
+                <div class="education-details">
+                    <strong>Modules :</strong> Money & Banking, Private Equity, Entrepreneurial Finance and Leadership
+                </div>
+            </div>
+
+            <div class="education-item">
+                <div class="education-school">Lycée</div>
+                <div class="education-degree">Baccalauréat avec félicitations du Jury</div>
+                <div class="education-period">Note finale : 18,01/20</div>
+                <div class="education-details">
+                    Membre du programme sport-études équitation
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact" class="fade-in">
+        <h2 class="section-title">Contactez-moi</h2>
+        <div class="contact-content">
+            <p>Intéressé par mon profil ? N'hésitez pas à me contacter pour discuter ! </p>
+            <div class="contact-links">
+                <a href="mailto:janelle.lande@edhec.com" class="contact-link">
+                    📧 Email
+                </a>
+                <a href="https://www.linkedin.com/in/janelle-landé" target="_blank" class="contact-link">
+                    💼 LinkedIn
+                </a>
+                <a href="https://linktr.ee/janelle_lande" target="_blank" class="contact-link">
+                    🔗 Linktree
+                </a>
+                <a href="tel:+33783177530" class="contact-link">
+                    📞 +33 7 83 17 75 30
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <p>&copy; 2025 Janelle Landé. Tous droits réservés.</p>
+    </footer>
+
+    <script>
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Navbar scroll effect
+        window.addEventListener('scroll', () => {
+            const navbar = document.getElementById('navbar');
+            if (window.scrollY > 100) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        });
+
+        // Fade in animation on scroll
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.fade-in').forEach(el => {
+            observer.observe(el);
+        });
+
+        // Mouse follower effect
+        const cursorGlow = document.querySelector('.cursor-glow');
+        document.addEventListener('mousemove', (e) => {
+            cursorGlow.style.left = e.clientX + 'px';
+            cursorGlow.style.top = e.clientY + 'px';
+        });
+
+        // Add interactivity to skill categories
+        document.querySelectorAll('.skill-category').forEach(category => {
+            category.addEventListener('mouseenter', () => {
+                category.style.transform = 'translateY(-10px) scale(1.02)';
+            });
+            
+            category.addEventListener('mouseleave', () => {
+                category.style.transform = 'translateY(0) scale(1)';
+            });
+        });
+
+        // Experience items hover effect
+        document.querySelectorAll('.experience-item').forEach(item => {
+            item.addEventListener('mouseenter', () => {
+                item.style.transform = 'translateX(10px)';
+                item.style.boxShadow = '0 10px 30px rgba(255, 215, 0, 0.2)';
+            });
+            
+            item.addEventListener('mouseleave', () => {
+                item.style.transform = 'translateX(0)';
+                item.style.boxShadow = 'none';
+            });
+        });
+
+        // Parallax effect for hero section
+        window.addEventListener('scroll', () => {
+            const scrolled = window.pageYOffset;
+            const hero = document.querySelector('.hero');
+            const parallax = scrolled * 0.5;
+            hero.style.transform = `translateY(${parallax}px)`;
+        });
+
+        // Typing effect for hero title
+        const heroTitle = document.querySelector('.hero h1');
+        const originalText = heroTitle.textContent;
+        heroTitle.textContent = '';
+        
+        function typeWriter(text, i = 0) {
+            if (i < text.length) {
+                heroTitle.textContent += text.charAt(i);
+                setTimeout(() => typeWriter(text, i + 1), 100);
+            }
+        }
+
+        // Start typing effect after page load
+        window.addEventListener('load', () => {
+            setTimeout(() => typeWriter(originalText), 500);
+        });
+    </script>
+</body>
+</html>
